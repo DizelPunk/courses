@@ -10,7 +10,7 @@
         android:id="@+id/panel_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_bright"
+        android:background="#3600DDFF"
         android:gravity="center"
         android:orientation="vertical">
 

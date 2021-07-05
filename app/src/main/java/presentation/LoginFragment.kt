@@ -26,7 +26,7 @@ class LoginFragment : Fragment() {
             if (login_txt.text.toString() == "admin" && password_txt.text.toString() == "admin")
                 (activity as MainActivity).navController.navigate(R.id.navigateToWelcomeFragment)
             else
-                Toast.makeText(activity,"Неверные данные", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity,"Invalid data", Toast.LENGTH_SHORT).show();
         }
     }
 }

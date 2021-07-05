@@ -24,13 +24,7 @@ class MainActivity : AppCompatActivity() {
                 super.onBackPressed()
                 finish()
             }
-
             setNegativeButton("Нет") { _, _ ->
-                // if user press no, then return the activity
-                Toast.makeText(
-                    this@MainActivity, "Thank you",
-                    Toast.LENGTH_LONG
-                ).show()
             }
             setCancelable(true)
         }.create().show()
