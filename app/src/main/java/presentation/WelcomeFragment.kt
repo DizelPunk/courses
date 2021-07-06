@@ -7,23 +7,34 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.loginapplication.MainActivity
 import com.example.loginapplication.R
-import kotlinx.android.synthetic.main.fragment_welcome.*
+import com.example.loginapplication.databinding.FragmentWelcomeBinding
 
 
 class WelcomeFragment : Fragment() {
 
+    private var viewBinding: FragmentWelcomeBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val binding = FragmentWelcomeBinding.inflate(inflater,container,false)
+        viewBinding = binding
+        binding.exitBtn.setOnClickListener{
+            goToLoginFragment()
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
+        return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        exit_btn.setOnClickListener{
-            (activity as MainActivity).navController.navigate(R.id.navigateToLoginFragment)
-        }
+    fun goToLoginFragment(){
+        (activity as MainActivity).navController.navigate(R.id.navigateToLoginFragment)
     }
+
+    override fun onDestroyView() {
+        viewBinding = null
+        super.onDestroyView()
+    }
+
+
 }
