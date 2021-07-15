@@ -1,6 +1,7 @@
-package data.repository
+package data.services
 
-import data.IAuthService
+import data.boundairds.IAuthService
+import data.entity.SignInResponse
 import kotlinx.coroutines.delay
 
 class StubAuthServices : IAuthService {
@@ -8,6 +9,9 @@ class StubAuthServices : IAuthService {
         return if ( login == password && login.isNotEmpty() && password.isNotEmpty()) {
             delay(2000)
             SignInResponse(true)
-        } else SignInResponse(false)
+        } else {
+            delay(2000)
+            SignInResponse(false)
+        }
     }
 }
