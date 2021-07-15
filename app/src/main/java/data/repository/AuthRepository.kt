@@ -6,6 +6,7 @@ import domain.usecases.SignInResult
 
 class AuthRepository(private val autService:IAuthService) :IAuthRepository {
     override suspend fun signIn(login: String, password: String): SignInResult {
-        return SignInResult(autService.signIn(login,password).statusResponse)
+        val response = autService.signIn(login,password)
+        return SignInResult(response.statusResponse)
     }
 }
