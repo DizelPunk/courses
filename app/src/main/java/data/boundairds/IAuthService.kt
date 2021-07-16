@@ -1,6 +1,6 @@
-package data
+package data.boundairds
 
-import data.repository.SignInResponse
+import data.entity.SignInResponse
 
 interface IAuthService {
     suspend fun signIn(login:String,password:String): SignInResponse

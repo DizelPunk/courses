@@ -10,11 +10,17 @@ import android.widget.Toast
 import com.example.loginapplication.MainActivity
 import com.example.loginapplication.R
 import com.example.loginapplication.databinding.FragmentLoginBinding
+import domain.entity.SignInResult
+import domain.usecases.LoginModelUseCase
+import kotlinx.coroutines.*
+import org.koin.android.ext.android.inject
+import org.koin.core.context.GlobalContext
 
 
 class LoginFragment : Fragment(){
 
     private var viewBuilding: FragmentLoginBinding? = null;
+    private val loginModel:LoginModelUseCase by inject()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,17 +29,30 @@ class LoginFragment : Fragment(){
         val binding  = FragmentLoginBinding.inflate(inflater,container,false)
         viewBuilding = binding
         binding.loginBtn.setOnClickListener{
-           checkingCorrectData(binding)
+            MainScope().launch {
+                disableElementsOfLoginActivity(false)
+                val result = loginModel.signIn(
+                    viewBuilding!!.loginTxt.text.toString(),
+                    viewBuilding!!.passwordTxt.text.toString()
+                )
+                if (result.statusResult)
+                    (activity as MainActivity).navController.navigate(R.id.navigateToWelcomeFragment)
+                else {
+                    Toast.makeText(activity, "Uncorrected data, try again", Toast.LENGTH_SHORT)
+                        .show()
+                    disableElementsOfLoginActivity(true)
+                }
+            }
         }
         return binding.root
     }
 
-    fun checkingCorrectData(binding:FragmentLoginBinding)
+
+    private fun disableElementsOfLoginActivity(mode:Boolean)
     {
-        if (binding.loginTxt.text.toString() == "admin" && binding.passwordTxt.text.toString() == "admin")
-            (activity as MainActivity).navController.navigate(R.id.navigateToWelcomeFragment)
-        else
-            Toast.makeText(activity,"Invalid data", Toast.LENGTH_SHORT).show();
+        viewBuilding!!.loginBtn.isClickable = mode
+        viewBuilding!!.loginTxt.isEnabled = mode
+        viewBuilding!!.passwordTxt.isEnabled = mode
     }
 
     override fun onDestroyView() {
