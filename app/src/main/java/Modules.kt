@@ -6,6 +6,8 @@ import domain.boundaries.IAuthRepository
 import domain.entity.SignInResult
 import domain.usecases.LoginModelUseCase
 import org.koin.dsl.module
+import presentation.LoginViewModel
+import presentation.Router
 
 val appModule = module {
     single { SignInResult(get()) }
@@ -13,5 +15,6 @@ val appModule = module {
     single<IAuthService>{StubAuthServices()}
     single<IAuthRepository>{AuthRepository(get())}
     single{LoginModelUseCase(get())}
-
+    single{ Router() }
+    single{LoginViewModel(get(),get())}
 }
