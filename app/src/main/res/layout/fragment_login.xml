@@ -7,9 +7,6 @@
         <variable
             name="viewModel"
             type="presentation.LoginViewModel" />
-        <variable
-            name="toastSystem"
-            type="android.widget.Toast" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
