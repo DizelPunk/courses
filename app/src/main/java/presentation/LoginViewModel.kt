@@ -10,7 +10,7 @@ import com.example.loginapplication.R
 import domain.usecases.LoginModelUseCase
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val router: Router, private val loginModel: LoginModelUseCase) :
+class LoginViewModel(private val router: Router, private val loginModel: LoginModelUseCase , private val toastManager:ToastManager) :
     ViewModel() {
 
     private val _isEnabled = MutableLiveData(true)
@@ -30,8 +30,7 @@ class LoginViewModel(private val router: Router, private val loginModel: LoginMo
             if (result.statusResult) {
                 router.navigateTo(R.id.navigateToWelcomeFragment.toString())
             } else {
-                Toast.makeText(context, "Uncorrected data, try again", Toast.LENGTH_SHORT)
-                    .show()
+                toastManager.showToast("Uncorrected data, try again", Toast.LENGTH_SHORT)
             }
         }
     }

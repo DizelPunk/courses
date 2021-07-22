@@ -16,6 +16,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val loginViewModel: LoginViewModel by inject()
     private val router:Router by inject()
+    private val toastManager:ToastManager by inject()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,13 +31,13 @@ class LoginFragment : Fragment() {
         Navigation.findNavController(requireView()).navigate(R.id.navigateToWelcomeFragment)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         router.subscribeToNavigationEvent(::navigateTo)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
         router.unSubscribe(::navigateTo)
     }
 
