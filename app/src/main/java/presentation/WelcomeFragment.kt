@@ -1,39 +1,47 @@
 package presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.loginapplication.MainActivity
-import com.example.loginapplication.R
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.loginapplication.databinding.FragmentWelcomeBinding
+import org.koin.android.ext.android.inject
 
 
-class WelcomeFragment : Fragment() {
+class WelcomeFragment : Fragment(), IUIOnClickListener {
 
-    private var viewBinding: FragmentWelcomeBinding? = null
+    private val router: Router by inject()
+    private lateinit var binding: FragmentWelcomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = FragmentWelcomeBinding.inflate(inflater,container,false)
-        viewBinding = binding
-        binding.exitBtn.setOnClickListener{
-            goToLoginFragment()
-        }
+        binding = FragmentWelcomeBinding.inflate(inflater, container, false)
+        binding.clickListener = this
         // Inflate the layout for this fragment
         return binding.root
     }
 
-    fun goToLoginFragment(){
-        (activity as MainActivity).navController.navigate(R.id.navigateToLoginFragment)
+    fun navigateTo(screenId: String, args: Bundle?) {
+        Navigation.findNavController(requireView()).navigate(screenId.toInt())
     }
 
-    override fun onDestroyView() {
-        viewBinding = null
-        super.onDestroyView()
+    override fun onResume() {
+        super.onResume()
+        router.subscribeToNavigationEvent(::navigateTo)
+    }
+
+    override fun onPause() {
+        router.unSubscribe(::navigateTo)
+        super.onPause()
+    }
+
+    override fun onClick(view: View) {
+        Navigation.findNavController(requireView()).popBackStack()
     }
 
 
