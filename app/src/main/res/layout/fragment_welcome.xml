@@ -2,45 +2,62 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="clickListener"
             type="presentation.IUIOnClickListener" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/welcome_main_layuot"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/background_light"
-    android:gravity="center|center_vertical">
 
-    <Button
-        android:id="@+id/exit_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:shadowColor="#1B0000"
-        android:shadowRadius="5"
-        android:text="Exit"
-        android:onClick="@{clickListener::onClick}"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome_txt" />
-
-    <TextView
-        android:id="@+id/welcome_txt"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/welcome_main_layuot"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="238dp"
-        android:gravity="center"
-        android:shadowColor="#000000"
-        android:shadowRadius="5"
-        android:text="Welcome"
-        android:textSize="60sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@android:color/background_light"
+        android:gravity="center|center_vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/exit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:onClick="@{clickListener::onClick}"
+            android:shadowColor="#1B0000"
+            android:shadowRadius="5"
+            android:text="Exit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_txt" />
+
+        <TextView
+            android:id="@+id/welcome_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="238dp"
+            android:gravity="center"
+            android:shadowColor="#000000"
+            android:shadowRadius="5"
+            android:text="Welcome"
+            android:textSize="60sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/employees_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:onClick="@{clickListener::onClick}"
+            android:shadowColor="#1B0000"
+            android:shadowRadius="5"
+            android:text="Check employees"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exit_btn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
