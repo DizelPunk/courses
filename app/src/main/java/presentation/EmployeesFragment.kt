@@ -7,15 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.loginapplication.R
-import domain.usecases.EmployeesModelUseCase
-import domain.usecases.LoginModelUseCase
+import domain.usecases.EmployeesUseCase
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class EmployeesFragment : Fragment() {
 
-    val employeesModelUseCase:EmployeesModelUseCase by inject()
+    private val employeesUseCase:EmployeesUseCase by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +27,7 @@ class EmployeesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MainScope().launch {
-            val listOfEmployees = employeesModelUseCase.getEmployees()
+            val listOfEmployees = employeesUseCase.getEmployees()
             listOfEmployees.forEach {
                 Log.i("Name of employee:",it.getFirstName())
             }

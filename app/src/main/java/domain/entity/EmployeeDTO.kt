@@ -13,13 +13,4 @@ class EmployeeDTO(
     fun getUserName() = this.userName
     fun getEmployeeDate() = this.employeeDate
 
-    companion object {
-        fun fromEmployee(src: Employee) = EmployeeDTO(
-            src.getFirstName(),
-            src.getLastName(),
-            src.getUserName(),
-            src.getEmployeeData()
-        )
-    }
-
 }
