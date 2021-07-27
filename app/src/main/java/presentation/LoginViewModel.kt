@@ -7,10 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginapplication.R
-import domain.usecases.LoginModelUseCase
+import domain.usecases.LoginUseCase
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val router: Router, private val loginModel: LoginModelUseCase , private val toastManager:ToastManager) :
+class LoginViewModel(private val router: Router, private val loginUseCase: LoginUseCase, private val toastManager:ToastManager) :
     ViewModel() {
 
     private val _isEnabled = MutableLiveData(true)
@@ -22,7 +22,7 @@ class LoginViewModel(private val router: Router, private val loginModel: LoginMo
     fun signIn(context: Context) {
         viewModelScope.launch {
             _isEnabled.value = false
-            val result = loginModel.signIn(
+            val result = loginUseCase.signIn(
                 loginTxt,
                 passwordTxt
             )
